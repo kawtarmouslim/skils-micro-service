@@ -15,4 +15,5 @@ public class CompetenceDto implements Serializable {
     Long id;
     String competence;
     String description;
+
 }

@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.example.competence.dto.CompetenceDto;
 import org.example.competence.entite.Competence;
 import org.example.competence.repository.CompetenceRepository;
+import org.example.competence.repository.SousCompletenceRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
@@ -15,11 +16,14 @@ import java.util.stream.Collectors;
 public class CompetenceService {
     private  final CompetenceRepository competenceRepository;
     private final ModelMapper modelMapper;
+    private final SousCompletenceRepository sousCompletenceRepository;
     public CompetenceDto createCompetence(CompetenceDto competenceDto) {
         Competence competence = modelMapper.map(competenceDto, Competence.class);
         Competence result = competenceRepository.save(competence);
         return modelMapper.map(result, CompetenceDto.class);
     }
+
+
     public CompetenceDto updateCompetence(Long id,CompetenceDto competenceDto) {
         Competence competence = competenceRepository.findById(id).orElse(null);
         competence.setCompetence(competenceDto.getCompetence());
@@ -27,6 +31,8 @@ public class CompetenceService {
         Competence result = competenceRepository.save(competence);
         return modelMapper.map(result, CompetenceDto.class);
     }
+
+
     public void deleteCompetence(Long id) {
         competenceRepository.deleteById(id);
     }
@@ -35,5 +41,18 @@ public class CompetenceService {
         return competences.stream().map(competence -> modelMapper.map(competence, CompetenceDto.class)).collect(Collectors.toList());
     }
 
+
+
+    public void verifierEtMettreAJourStatutCompetence(Long competenceId) {
+        Competence competence = competenceRepository.findById(competenceId).orElseThrow();
+
+        long total = sousCompletenceRepository.countByCompetenceId(competenceId);
+        long valides = sousCompletenceRepository.countByCompetenceIdAndEtatValidationTrue(competenceId);
+
+        boolean estAcquise = total > 0 && valides == total;
+        competence.setAcquise(estAcquise);
+
+        competenceRepository.save(competence);
+    }
 
 }
