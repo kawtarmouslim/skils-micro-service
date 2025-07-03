@@ -23,7 +23,7 @@ public class SousCompetenceService {
                 .orElseThrow(() -> new RuntimeException("Event not found"));
 
         SousCompetence sousCompetence = modelMapper.map(sousCompetenceDto, SousCompetence.class);
-
+        updateCompetenceValidation(competence.getId());
         sousCompetence.setCompetence(competence);
         SousCompetence sousCompetenceSaved = sousCompletenceRepository.save(sousCompetence);
      SousCompetenceDto result = modelMapper.map(sousCompetenceSaved, SousCompetenceDto.class);
@@ -51,21 +51,29 @@ public class SousCompetenceService {
 
         sousCompetence.setEtatValidation(etatValidation);
         SousCompetence updated = sousCompletenceRepository.save(sousCompetence);
-        competenceService.verifierEtMettreAJourStatutCompetence(updated.getCompetence().getId());
-
+        updateCompetenceValidation(updated.getCompetence().getId());
         SousCompetenceDto dto = modelMapper.map(updated, SousCompetenceDto.class);
         dto.setCompetence_id(updated.getCompetence().getId());
         return dto;
     }
 
-    public SousCompetenceDto validerSousCompetence(Long id) {
-        SousCompetence sc = sousCompletenceRepository.findById(id).orElseThrow();
-        sc.setEtatValidation(true);
-        sousCompletenceRepository.save(sc);
 
-        competenceService.verifierEtMettreAJourStatutCompetence(sc.getCompetence().getId());
+    private void updateCompetenceValidation(Long competenceId) {
+        Competence competence = competenceRepository.findByIdWithSousCompetences(competenceId)
+                .orElseThrow(() -> new RuntimeException("Competence not found"));
 
-        return modelMapper.map(sc, SousCompetenceDto.class);
+        long totalSousCompetences = competence.getSousCompetenceList().size();
+        long validatedSousCompetences = competence.getSousCompetenceList().stream()
+                .filter(SousCompetence::isEtatValidation)
+                .count();
+
+        // Règle : la compétence est acquise si toutes les sous-compétences sont validées
+        boolean isCompetenceValidated = totalSousCompetences > 0 && validatedSousCompetences == totalSousCompetences;
+        // Alternative : compétence acquise si au moins 75 % des sous-compétences sont validées
+        // boolean isCompetenceValidated = totalSousCompetences > 0 &&
+        //        ((double) validatedSousCompetences / totalSousCompetences) >= 0.75;
+
+        competence.setEtatValidation(isCompetenceValidated);
+        competenceRepository.save(competence);
     }
-
 }

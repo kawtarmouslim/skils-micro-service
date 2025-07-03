@@ -19,7 +19,7 @@ public class Competence {
     private Long id;
     private String competence;
     private String description;
-    private Boolean acquise = false;
+    private boolean etatValidation;
     @OneToMany(mappedBy = "competence", cascade = CascadeType.ALL)
     private List<SousCompetence> sousCompetenceList;
 

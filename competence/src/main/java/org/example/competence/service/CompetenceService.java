@@ -43,16 +43,6 @@ public class CompetenceService {
 
 
 
-    public void verifierEtMettreAJourStatutCompetence(Long competenceId) {
-        Competence competence = competenceRepository.findById(competenceId).orElseThrow();
 
-        long total = sousCompletenceRepository.countByCompetenceId(competenceId);
-        long valides = sousCompletenceRepository.countByCompetenceIdAndEtatValidationTrue(competenceId);
-
-        boolean estAcquise = total > 0 && valides == total;
-        competence.setAcquise(estAcquise);
-
-        competenceRepository.save(competence);
-    }
 
 }
