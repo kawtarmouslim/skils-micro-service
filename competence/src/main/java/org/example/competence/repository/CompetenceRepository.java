@@ -10,4 +10,5 @@ import java.util.Optional;
 public interface CompetenceRepository extends JpaRepository<Competence, Long> {
     @Query("SELECT c FROM Competence c LEFT JOIN FETCH c.sousCompetenceList WHERE c.id = :id")
     Optional<Competence> findByIdWithSousCompetences(@Param("id") Long id);
+
 }
