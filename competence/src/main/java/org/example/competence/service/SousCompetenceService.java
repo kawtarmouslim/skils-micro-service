@@ -67,11 +67,10 @@ public class SousCompetenceService {
                 .filter(SousCompetence::isEtatValidation)
                 .count();
 
-        // Règle : la compétence est acquise si toutes les sous-compétences sont validées
-        boolean isCompetenceValidated = totalSousCompetences > 0 && validatedSousCompetences == totalSousCompetences;
+        //boolean isCompetenceValidated = totalSousCompetences > 0 && validatedSousCompetences == totalSousCompetences;
         // Alternative : compétence acquise si au moins 75 % des sous-compétences sont validées
-        // boolean isCompetenceValidated = totalSousCompetences > 0 &&
-        //        ((double) validatedSousCompetences / totalSousCompetences) >= 0.75;
+        boolean isCompetenceValidated = totalSousCompetences > 0 &&
+               ((double) validatedSousCompetences / totalSousCompetences) >= 0.75;
 
         competence.setEtatValidation(isCompetenceValidated);
         competenceRepository.save(competence);
