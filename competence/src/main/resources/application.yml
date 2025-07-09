@@ -8,7 +8,7 @@ spring:
     import: optional:configserver:http://localhost:8888
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://db:3306/competence?createDatabaseIfNotExist=true
+    url: jdbc:mysql://localhost:3306/competence?createDatabaseIfNotExist=true
     username: root
     password:
   jpa:

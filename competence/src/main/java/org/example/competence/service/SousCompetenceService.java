@@ -61,8 +61,9 @@ public class SousCompetenceService {
     private void updateCompetenceValidation(Long competenceId) {
         Competence competence = competenceRepository.findByIdWithSousCompetences(competenceId)
                 .orElseThrow(() -> new RuntimeException("Competence not found"));
-
+         //calc nmb tot de sous c lie a un c
         long totalSousCompetences = competence.getSousCompetenceList().size();
+        //compte seulemet les sc valider
         long validatedSousCompetences = competence.getSousCompetenceList().stream()
                 .filter(SousCompetence::isEtatValidation)
                 .count();
