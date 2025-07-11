@@ -17,6 +17,15 @@ public class Rendu {
     private String lienRendu;
     private Long apprenantId;
     private LocalDateTime dateRendu;
+    private  Long idBref;
+
+    public Long getIdBref() {
+        return idBref;
+    }
+
+    public void setIdBref(Long idBref) {
+        this.idBref = idBref;
+    }
 
     public Long getId() {
         return id;

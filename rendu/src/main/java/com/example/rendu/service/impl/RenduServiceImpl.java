@@ -2,13 +2,17 @@ package com.example.rendu.service.impl;
 
 
 import com.example.rendu.clientFeign.ApprentClientFeign;
+import com.example.rendu.clientFeign.BrefClient;
 import com.example.rendu.dto.ApprenantDTO;
+import com.example.rendu.dto.BrefDto;
 import com.example.rendu.dto.RenduDTO;
 import com.example.rendu.mapper.RenduMapper;
 import com.example.rendu.model.Apprente;
+import com.example.rendu.model.Bref;
 import com.example.rendu.model.Rendu;
 import com.example.rendu.repository.RenduRepository;
 import com.example.rendu.service.RenduService;
+import feign.FeignException;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,25 +29,30 @@ public class RenduServiceImpl implements RenduService {
     @Qualifier("renduMapperImpl")
     private final RenduMapper mapper;
     private final ApprentClientFeign apprentClientFeign;
+    private  final BrefClient brefClient;
 
 
     @Override
     public RenduDTO save(RenduDTO renduDTO) {
-        if (renduDTO.getIdApprent() == null) {
-            throw new IllegalArgumentException("L'identifiant de l'apprenant (idApprent) est requis");
+        try {
+            ApprenantDTO apprenant = apprentClientFeign.getById(renduDTO.getIdApprent());
+        } catch (FeignException.NotFound e) {
+            throw new RuntimeException("Apprenant non trouvé avec l'ID : " + renduDTO.getIdApprent());
         }
 
-        ApprenantDTO apprenant = apprentClientFeign.getById(renduDTO.getIdApprent());
-
-        if (apprenant == null) {
-            throw new RuntimeException("Apprenant non trouvé avec l'ID : " + renduDTO.getIdApprent());
+        try {
+            BrefDto brefDto = brefClient.getBref(renduDTO.getIdBref());
+        } catch (FeignException.NotFound e) {
+            throw new RuntimeException("Bref non trouvé avec l'ID : " + renduDTO.getIdBref());
         }
 
         Rendu rendu = mapper.toEntity(renduDTO);
         rendu.setApprenantId(renduDTO.getIdApprent());
+        rendu.setIdBref(renduDTO.getIdBref());
 
         return mapper.toDTO(repository.save(rendu));
     }
+
 
 
     @Override

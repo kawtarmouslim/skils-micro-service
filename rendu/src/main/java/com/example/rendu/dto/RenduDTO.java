@@ -4,6 +4,7 @@ package com.example.rendu.dto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.antlr.v4.runtime.misc.NotNull;
 
 import java.time.LocalDateTime;
 
@@ -13,10 +14,20 @@ public class RenduDTO {
     private Long id;
     private String lienRendu;
     private LocalDateTime dateRendu;
-   private Long idApprent;
+
+    private Long idApprent;
+    private Long idBref;
 
     public Long getId() {
         return id;
+    }
+
+    public Long getIdBref() {
+        return idBref;
+    }
+
+    public void setIdBref(Long idBref) {
+        this.idBref = idBref;
     }
 
     public void setId(Long id) {

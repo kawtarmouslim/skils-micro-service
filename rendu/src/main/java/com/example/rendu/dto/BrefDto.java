@@ -1,27 +1,20 @@
-package org.example.bref.entity;
+package com.example.rendu.dto;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
+import java.io.Serializable;
 import java.util.Date;
 
-@Entity
 @AllArgsConstructor
 @NoArgsConstructor
 
-public class Bref {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idBref;
-    private String titre;
-    private String description;
-    private Date debut;
+public class BrefDto implements Serializable {
+    Long idBref;
+    String titre;
+    String description;
+    Date debut;
+    Date fin;
 
     public Long getIdBref() {
         return idBref;
@@ -62,7 +55,4 @@ public class Bref {
     public void setFin(Date fin) {
         this.fin = fin;
     }
-
-    private Date fin;
-
 }
