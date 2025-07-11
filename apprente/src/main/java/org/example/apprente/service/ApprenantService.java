@@ -33,6 +33,7 @@ public class ApprenantService {
     public ApprenantDTO update(Long id, ApprenantDTO dto) {
         ApprenantDTO existing = findById(id);
         dto.setId(existing.getId());
+
         return mapper.toDTO(repository.save(mapper.toEntity(dto)));
     }
 

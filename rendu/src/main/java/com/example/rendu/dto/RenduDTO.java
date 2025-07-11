@@ -11,6 +11,9 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class RenduDTO {
     private Long id;
+    private String lienRendu;
+    private LocalDateTime dateRendu;
+   private Long idApprent;
 
     public Long getId() {
         return id;
@@ -36,7 +39,12 @@ public class RenduDTO {
         this.dateRendu = dateRendu;
     }
 
-    private String lienRendu;
-    private LocalDateTime dateRendu;
+    public Long getIdApprent() {
+        return idApprent;
+    }
+
+    public void setIdApprent(Long idApprent) {
+        this.idApprent = idApprent;
+    }
 }
 

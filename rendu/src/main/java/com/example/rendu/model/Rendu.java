@@ -14,9 +14,9 @@ public class Rendu {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-
     private String lienRendu;
+    private Long apprenantId;
+    private LocalDateTime dateRendu;
 
     public Long getId() {
         return id;
@@ -34,6 +34,14 @@ public class Rendu {
         this.lienRendu = lienRendu;
     }
 
+    public Long getApprenantId() {
+        return apprenantId;
+    }
+
+    public void setApprenantId(Long apprenantId) {
+        this.apprenantId = apprenantId;
+    }
+
     public LocalDateTime getDateRendu() {
         return dateRendu;
     }
@@ -41,9 +49,5 @@ public class Rendu {
     public void setDateRendu(LocalDateTime dateRendu) {
         this.dateRendu = dateRendu;
     }
-
-    private LocalDateTime dateRendu;
-
-
 }
 

@@ -9,8 +9,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-07-10T13:42:28+0200",
-    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 21.0.6 (Oracle Corporation)"
+    date = "2025-07-11T11:02:47+0100",
+    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 23.0.2 (Oracle Corporation)"
 )
 @Component
 public class RenduMapperImpl implements RenduMapper {
@@ -23,6 +23,7 @@ public class RenduMapperImpl implements RenduMapper {
 
         RenduDTO renduDTO = new RenduDTO();
 
+        renduDTO.setIdApprent( rendu.getApprenantId() );
         renduDTO.setId( rendu.getId() );
         renduDTO.setLienRendu( rendu.getLienRendu() );
         renduDTO.setDateRendu( rendu.getDateRendu() );
@@ -38,6 +39,7 @@ public class RenduMapperImpl implements RenduMapper {
 
         Rendu rendu = new Rendu();
 
+        rendu.setApprenantId( dto.getIdApprent() );
         rendu.setId( dto.getId() );
         rendu.setLienRendu( dto.getLienRendu() );
         rendu.setDateRendu( dto.getDateRendu() );

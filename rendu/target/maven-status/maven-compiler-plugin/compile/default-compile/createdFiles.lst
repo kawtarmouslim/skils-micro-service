@@ -1,0 +1,12 @@
+com\example\rendu\repository\RenduRepository.class
+com\example\rendu\mapper\RenduMapperImpl.class
+com\example\rendu\model\Rendu.class
+com\example\rendu\mapper\RenduMapper.class
+com\example\rendu\model\Apprente.class
+com\example\rendu\service\RenduService.class
+com\example\rendu\RenduApplication.class
+com\example\rendu\controller\RenduController.class
+com\example\rendu\dto\RenduDTO.class
+com\example\rendu\clientFeign\ApprentClientFeign.class
+com\example\rendu\service\impl\RenduServiceImpl.class
+com\example\rendu\dto\ApprenantDTO.class

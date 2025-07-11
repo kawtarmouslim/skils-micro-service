@@ -12,7 +12,7 @@ import lombok.*;
 public class Apprenant {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long idApprent;
 
     private String nom;
     private String prenom;

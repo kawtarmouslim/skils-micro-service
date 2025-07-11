@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 public interface SousCompletenceRepository extends JpaRepository<SousCompetence, Long> {
-
+@Query(value = "select COUNT (sousCompetenceId)from SousCompetence  WHERE  etatValidation=TRUE ",nativeQuery = true)
+    Long sousCompetenceetatValidation();
 
 }

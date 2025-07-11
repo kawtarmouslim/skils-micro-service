@@ -9,6 +9,8 @@ import org.example.competence.repository.SousCompletenceRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @AllArgsConstructor
 public class SousCompetenceService {
@@ -61,19 +63,10 @@ public class SousCompetenceService {
     private void updateCompetenceValidation(Long competenceId) {
         Competence competence = competenceRepository.findByIdWithSousCompetences(competenceId)
                 .orElseThrow(() -> new RuntimeException("Competence not found"));
-         //calc nmb tot de sous c lie a un c
-        long totalSousCompetences = competence.getSousCompetenceList().size();
-        //compte seulemet les sc valider
-        long validatedSousCompetences = competence.getSousCompetenceList().stream()
-                .filter(SousCompetence::isEtatValidation)
-                .count();
-
-        //boolean isCompetenceValidated = totalSousCompetences > 0 && validatedSousCompetences == totalSousCompetences;
-        // Alternative : compétence acquise si au moins 75 % des sous-compétences sont validées
-        boolean isCompetenceValidated = totalSousCompetences > 0 &&
-               ((double) validatedSousCompetences / totalSousCompetences) >= 0.75;
-
-        competence.setEtatValidation(isCompetenceValidated);
+        List<SousCompetence> sousCompetences = competence.getSousCompetenceList();
+        long totalSousCompetences = sousCompetences.size();
+        Boolean val= sousCompletenceRepository.sousCompetenceetatValidation() / totalSousCompetences >= 75;
+        competence.setEtatValidation(val);
         competenceRepository.save(competence);
     }
 }
