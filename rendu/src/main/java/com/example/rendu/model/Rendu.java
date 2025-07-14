@@ -18,9 +18,18 @@ public class Rendu {
     private Long apprenantId;
     private LocalDateTime dateRendu;
     private  Long idBref;
+    private  Long idCompetence;
 
     public Long getIdBref() {
         return idBref;
+    }
+
+    public Long getIdCompetence() {
+        return idCompetence;
+    }
+
+    public void setIdCompetence(Long idCompetence) {
+        this.idCompetence = idCompetence;
     }
 
     public void setIdBref(Long idBref) {

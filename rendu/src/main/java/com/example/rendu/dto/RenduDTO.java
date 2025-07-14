@@ -14,6 +14,7 @@ public class RenduDTO {
     private Long id;
     private String lienRendu;
     private LocalDateTime dateRendu;
+    private Long idCompetence;
 
     private Long idApprent;
     private Long idBref;
@@ -56,6 +57,14 @@ public class RenduDTO {
 
     public void setIdApprent(Long idApprent) {
         this.idApprent = idApprent;
+    }
+
+    public Long getIdCompetence() {
+        return idCompetence;
+    }
+
+    public void setIdCompetence(Long idCompetence) {
+        this.idCompetence = idCompetence;
     }
 }
 

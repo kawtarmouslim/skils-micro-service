@@ -3,8 +3,10 @@ package com.example.rendu.service.impl;
 
 import com.example.rendu.clientFeign.ApprentClientFeign;
 import com.example.rendu.clientFeign.BrefClient;
+import com.example.rendu.clientFeign.CompetenceFeign;
 import com.example.rendu.dto.ApprenantDTO;
 import com.example.rendu.dto.BrefDto;
+import com.example.rendu.dto.CompetenceDto;
 import com.example.rendu.dto.RenduDTO;
 import com.example.rendu.mapper.RenduMapper;
 import com.example.rendu.model.Apprente;
@@ -30,6 +32,7 @@ public class RenduServiceImpl implements RenduService {
     private final RenduMapper mapper;
     private final ApprentClientFeign apprentClientFeign;
     private  final BrefClient brefClient;
+    private  final CompetenceFeign competenceClient;
 
 
     @Override
@@ -45,10 +48,17 @@ public class RenduServiceImpl implements RenduService {
         } catch (FeignException.NotFound e) {
             throw new RuntimeException("Bref non trouvé avec l'ID : " + renduDTO.getIdBref());
         }
+        try {
+            CompetenceDto competenceDto = competenceClient.getCompetenceById(renduDTO.getIdCompetence());
+        } catch (FeignException.NotFound e) {
+            throw new RuntimeException("competence non trouvé avec l'ID : " + renduDTO.getIdCompetence());
+        }
+
 
         Rendu rendu = mapper.toEntity(renduDTO);
         rendu.setApprenantId(renduDTO.getIdApprent());
         rendu.setIdBref(renduDTO.getIdBref());
+        rendu.setIdCompetence(renduDTO.getIdCompetence());
 
         return mapper.toDTO(repository.save(rendu));
     }
