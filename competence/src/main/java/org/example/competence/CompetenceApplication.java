@@ -9,7 +9,8 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication
 @EnableFeignClients
 
-public class CompetenceApplication {
+public class
+CompetenceApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(CompetenceApplication.class, args);

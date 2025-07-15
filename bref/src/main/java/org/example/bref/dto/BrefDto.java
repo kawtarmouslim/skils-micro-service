@@ -5,6 +5,8 @@ import org.example.bref.entity.Bref;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
+
 @AllArgsConstructor
 @NoArgsConstructor
 
@@ -14,6 +16,15 @@ public class BrefDto implements Serializable {
     String description;
     Date debut;
     Date fin;
+    private List<Long> id;
+
+    public List<Long> getId() {
+        return id;
+    }
+
+    public void setId(List<Long> id) {
+        this.id = id;
+    }
 
     public Long getIdBref() {
         return idBref;

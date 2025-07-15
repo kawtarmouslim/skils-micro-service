@@ -1,15 +1,13 @@
 package org.example.bref.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @AllArgsConstructor
@@ -22,6 +20,16 @@ public class Bref {
     private String titre;
     private String description;
     private Date debut;
+    @ElementCollection
+    private List<Long> id;
+
+    public List<Long> getId() {
+        return id;
+    }
+
+    public void setId(List<Long> id) {
+        this.id = id;
+    }
 
     public Long getIdBref() {
         return idBref;

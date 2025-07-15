@@ -3,8 +3,10 @@ package org.example.bref.service;
 import lombok.AllArgsConstructor;
 import org.example.bref.dto.BrefDto;
 import org.example.bref.entity.Bref;
+import org.example.bref.feignClient.CompetenceClientFeign;
 import org.example.bref.repository.BrefRepository;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -17,6 +19,9 @@ import java.util.stream.Collectors;
 public class BrefService {
     private  final BrefRepository brefRepository;
     private final ModelMapper modelMapper;
+
+    private final CompetenceClientFeign competenceClientFeign;
+
 
     public BrefDto create(BrefDto brefDto) {
 

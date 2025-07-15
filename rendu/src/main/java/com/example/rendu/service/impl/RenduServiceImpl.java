@@ -48,17 +48,17 @@ public class RenduServiceImpl implements RenduService {
         } catch (FeignException.NotFound e) {
             throw new RuntimeException("Bref non trouvé avec l'ID : " + renduDTO.getIdBref());
         }
-        try {
-            CompetenceDto competenceDto = competenceClient.getCompetenceById(renduDTO.getIdCompetence());
-        } catch (FeignException.NotFound e) {
-            throw new RuntimeException("competence non trouvé avec l'ID : " + renduDTO.getIdCompetence());
-        }
+//        try {
+//            CompetenceDto competenceDto = competenceClient.getCompetenceById(renduDTO.getIdCompetence());
+//        } catch (FeignException.NotFound e) {
+//            throw new RuntimeException("competence non trouvé avec l'ID : " + renduDTO.getIdCompetence());
+//        }
 
 
         Rendu rendu = mapper.toEntity(renduDTO);
         rendu.setApprenantId(renduDTO.getIdApprent());
         rendu.setIdBref(renduDTO.getIdBref());
-        rendu.setIdCompetence(renduDTO.getIdCompetence());
+//        rendu.setIdCompetence(renduDTO.getIdCompetence());
 
         return mapper.toDTO(repository.save(rendu));
     }
