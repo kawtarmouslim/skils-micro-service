@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@FeignClient(name = "competence", url = "http://localhost:8090") // Change le port selon ton service
+@FeignClient(name = "competence", url = "http://localhost:8090")
 
 public interface CompetenceClientFeign {
     @PostMapping("api/v1/add")

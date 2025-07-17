@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor
@@ -13,35 +14,22 @@ public class Rendu {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long idRendu;
     private String lienRendu;
     private Long apprenantId;
     private LocalDateTime dateRendu;
     private  Long idBref;
-    private  Long idCompetence;
 
-    public Long getIdBref() {
-        return idBref;
+    @ElementCollection
+
+    private List<Long> id;
+
+    public Long getIdRendu() {
+        return idRendu;
     }
 
-    public Long getIdCompetence() {
-        return idCompetence;
-    }
-
-    public void setIdCompetence(Long idCompetence) {
-        this.idCompetence = idCompetence;
-    }
-
-    public void setIdBref(Long idBref) {
-        this.idBref = idBref;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+    public void setIdRendu(Long idRendu) {
+        this.idRendu = idRendu;
     }
 
     public String getLienRendu() {
@@ -67,5 +55,23 @@ public class Rendu {
     public void setDateRendu(LocalDateTime dateRendu) {
         this.dateRendu = dateRendu;
     }
+
+    public Long getIdBref() {
+        return idBref;
+    }
+
+    public List<Long> getId() {
+        return id;
+    }
+
+    public void setId(List<Long> id) {
+        this.id = id;
+    }
+
+    public void setIdBref(Long idBref) {
+        this.idBref = idBref;
+    }
+
+
 }
 

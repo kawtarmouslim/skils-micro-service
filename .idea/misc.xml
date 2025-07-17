@@ -12,6 +12,8 @@
         <option value="$PROJECT_DIR$/apprente/pom.xml" />
         <option value="$PROJECT_DIR$/bref/pom.xml" />
         <option value="$PROJECT_DIR$/rendu/pom.xml" />
+        <option value="$PROJECT_DIR$/identity-service/pom.xml" />
+        <option value="$PROJECT_DIR$/identity/pom.xml" />
       </list>
     </option>
   </component>

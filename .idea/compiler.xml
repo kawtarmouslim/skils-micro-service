@@ -40,14 +40,23 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="false">
-          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/unknown/lombok-unknown.jar" />
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.30/lombok-1.18.30.jar" />
         </processorPath>
-        <module name="competence" />
         <module name="bref" />
+      </profile>
+      <profile name="Annotation profile for identity" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.38/lombok-1.18.38.jar" />
+        </processorPath>
+        <module name="competence" />
+        <module name="identity" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="identity-service" target="17" />
       <module name="souscompetence" target="17" />
     </bytecodeTargetLevel>
   </component>
@@ -59,6 +68,8 @@
       <module name="config-server" options="-parameters" />
       <module name="discovery" options="-parameters" />
       <module name="gateway" options="-parameters" />
+      <module name="identity" options="-parameters" />
+      <module name="identity-service" options="-parameters" />
       <module name="rendu" options="-parameters" />
       <module name="souscompetence" options="-parameters" />
       <module name="transport-platform" options="-parameters -Amapstruct.defaultComponentModel=spring -parameters" />

@@ -7,32 +7,25 @@ import lombok.NoArgsConstructor;
 import org.antlr.v4.runtime.misc.NotNull;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
 public class RenduDTO {
-    private Long id;
+    private Long idRendu;
     private String lienRendu;
     private LocalDateTime dateRendu;
-    private Long idCompetence;
-
     private Long idApprent;
     private Long idBref;
+    private List<Long> id;
 
-    public Long getId() {
-        return id;
+
+    public Long getIdRendu() {
+        return idRendu;
     }
 
-    public Long getIdBref() {
-        return idBref;
-    }
-
-    public void setIdBref(Long idBref) {
-        this.idBref = idBref;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+    public void setIdRendu(Long idRendu) {
+        this.idRendu = idRendu;
     }
 
     public String getLienRendu() {
@@ -59,12 +52,22 @@ public class RenduDTO {
         this.idApprent = idApprent;
     }
 
-    public Long getIdCompetence() {
-        return idCompetence;
+    public Long getIdBref() {
+        return idBref;
     }
 
-    public void setIdCompetence(Long idCompetence) {
-        this.idCompetence = idCompetence;
+    public List<Long> getId() {
+        return id;
     }
+
+    public void setId(List<Long> id) {
+        this.id = id;
+    }
+
+    public void setIdBref(Long idBref) {
+        this.idBref = idBref;
+    }
+
+
 }
 
