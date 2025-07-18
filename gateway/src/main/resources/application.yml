@@ -1,0 +1,42 @@
+spring:
+  config:
+    import: optional:configserver:http://localhost:8888
+
+  application:
+    name: SWIGGY-GATEWAY
+
+  cloud:
+    gateway:
+      server:
+        webflux:
+          routes:
+            - id: competence
+              uri: lb://COMPETENCE
+              predicates:
+                - Path=api/v1/competence/**
+
+            - id: rendu
+              uri: lb://RENDU
+              predicates:
+                - Path=/api/rendus/**
+
+            - id: apprente
+              uri: lb://APPRENTE
+              predicates:
+                - Path=api/apprent/**
+
+            - id: bref
+              uri: lb://BREF
+              predicates:
+                - Path=api/v1/bref/**
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:9090/realms/springBoot-microservice-realm
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
