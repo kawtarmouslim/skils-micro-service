@@ -1,0 +1,86 @@
+version: '3.8'
+
+services:
+
+  mysql-competence:
+    image: mysql:8
+    container_name: mysql-competence
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      MYSQL_DATABASE: competence
+    ports:
+      - "3307:3306"
+    volumes:
+      - competence-data:/var/lib/mysql
+    networks:
+      - microservice-net
+    restart: unless-stopped
+
+  mysql-rendu:
+    image: mysql:8
+    container_name: mysql-rendu
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      MYSQL_DATABASE: rendu
+    ports:
+      - "3308:3306"
+    volumes:
+      - rendu-data:/var/lib/mysql
+    networks:
+      - microservice-net
+    restart: unless-stopped
+
+  mysql-apprente:
+    image: mysql:8
+    container_name: mysql-apprente
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      MYSQL_DATABASE: apprente
+    ports:
+      - "3309:3306"
+    volumes:
+      - apprente-data:/var/lib/mysql
+    networks:
+      - microservice-net
+    restart: unless-stopped
+
+  mysql-bref:
+    image: mysql:8
+    container_name: mysql-bref
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      MYSQL_DATABASE: bref
+    ports:
+      - "3310:3306"
+    volumes:
+      - bref-data:/var/lib/mysql
+    networks:
+      - microservice-net
+    restart: unless-stopped
+
+
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: pgadmin@local.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "5050:80"
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+    networks:
+      - microservice-net
+    restart: unless-stopped
+
+networks:
+  microservice-net:
+    driver: bridge
+
+volumes:
+  competence-data:
+  rendu-data:
+  apprente-data:
+  bref-data:
+  pgadmin-data:
