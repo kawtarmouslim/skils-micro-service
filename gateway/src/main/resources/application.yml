@@ -13,7 +13,7 @@ spring:
             - id: competence
               uri: lb://COMPETENCE
               predicates:
-                - Path=api/v1/competence/**
+                - Path=/api/v1/**
 
             - id: rendu
               uri: lb://RENDU
@@ -23,12 +23,12 @@ spring:
             - id: apprente
               uri: lb://APPRENTE
               predicates:
-                - Path=api/apprent/**
+                - Path=/api/apprenants**
 
             - id: bref
               uri: lb://BREF
               predicates:
-                - Path=api/v1/bref/**
+                - Path=/api/v1/**
 
   security:
     oauth2:
