@@ -23,12 +23,12 @@ spring:
             - id: apprente
               uri: lb://APPRENTE
               predicates:
-                - Path=/api/apprenants**
+                - Path=/api/apprenants/**
 
             - id: bref
               uri: lb://BREF
               predicates:
-                - Path=/api/v1/**
+                  - Path=/api/bref/**
 
   security:
     oauth2:
